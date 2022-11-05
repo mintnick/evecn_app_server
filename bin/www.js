@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('evecn-app-server:server');
-var http = require('http');
+import app from '../app.js'
+import createDebugMessage from 'debug';
+const debug = createDebugMessage('evecn-app-server:server');
+import http from 'http';
 
 /**
  * Get port from environment and store in Express.
