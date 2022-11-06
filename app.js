@@ -4,20 +4,28 @@ import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
+// import routes
 import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
+import alliRouter from './routes/alliance.js';
+import corpRouter from './routes/corporation.js';
+import charRouter from './routes/character.js';
+import campRouter from './routes/campaigns.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
+// set app
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(join(__dirname, 'public')));
 
+// set routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/alliance', alliRouter);
+app.use('/corporation', corpRouter);
+app.use('/character', charRouter);
+app.use('/campaigns', campRouter);
 
 export default app;
