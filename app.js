@@ -3,17 +3,19 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import phin from 'phin'
 
-// import routes
 import indexRouter from './routes/index.js';
-import alliRouter from './routes/alliance.js';
-import corpRouter from './routes/corporation.js';
-import charRouter from './routes/character.js';
-import campRouter from './routes/campaigns.js';
 
 // set app
 const app = express();
 
+// phin
+const phin = phin;
+phin.defaults = {'method': 'get', 'headers': {'User-Agent': 'evecn.app'}}
+app.phin = phin;
+
+// default modules
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,9 +25,5 @@ app.use(express.static(join(__dirname, 'public')));
 
 // set routes
 app.use('/', indexRouter);
-app.use('/alliance', alliRouter);
-app.use('/corporation', corpRouter);
-app.use('/character', charRouter);
-app.use('/campaigns', campRouter);
 
 export default app;
